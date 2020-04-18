@@ -68,7 +68,7 @@ class ImHomeHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         logger.info("In ImHomeHandler")
 
-        handler_input.speak("OK")
+        handler_input.speak("Yo look who just walked in the door!  It's Rob!")
         return handler_input.response_builder.response
 
 class BedroomFloorFanOffIntentHandler(AbstractRequestHandler):
@@ -84,8 +84,9 @@ class BedroomFloorFanOffIntentHandler(AbstractRequestHandler):
 
         response = requests.get(url, auth=(MOONLIGHT_USER_NAME, MOONLIGHT_USER_PASSWORD))
 
+        responseJson = response.json()
 
-        handler_input.response_builder.speak("Yo, look who just walked in the door!")
+        handler_input.response_builder.speak(responseJson("message"))
 
 
         return handler_input.response_builder.response
