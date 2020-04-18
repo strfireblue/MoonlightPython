@@ -68,23 +68,26 @@ class ImHomeHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         logger.info("In ImHomeHandler")
 
+        handler_input.speak("OK")
+        return handler_input.response_builder.response
+
+class BedroomFloorFanOffIntentHandler(AbstractRequestHandler):
+    """Handler for BedroomFloorFanOff EVENT"""
+    def can_handle(self, handler_input):
+        #logger.info("Checking to see if BedroomFloorFanOffIntentHandler should handle: " + is_intent_name("BedroomFloorFanOffIntent")(handler_input))
+        #return is_intent_name("BedroomFloorFanOffIntent")(handler_input)
+        return true
+
+    def handle(self, handler_input):
+        logger.info("In BedroomFloorFanOffHandler")
         url = MOONLIGHT_URL_BASE + "/api/HomeAuto/actionsequences/BEDROOMFLOORFANOFF"
 
         response = requests.get(url, auth=(MOONLIGHT_USER_NAME, MOONLIGHT_USER_PASSWORD))
 
 
         handler_input.response_builder.speak("Yo, look who just walked in the door!")
-        return handler_input.response_builder.response
 
-class BedroomFloorFanOffHandler(AbstractRequestHandler):
-    """Handler for BedroomFloorFanOff EVENT"""
-    def can_handle(self, handler_input):
-        return is_intent_name("BedroomFloorFanOffIntent")(handler_input)
 
-    def handle(self, handler_input):
-        logger.info("In BedroomFloorFanOffHandler")
-
-        handler_input.response_builder.speak("OK")
         return handler_input.response_builder.response
 
 
@@ -412,6 +415,7 @@ class LocalizationInterceptor(AbstractRequestInterceptor):
 
 # Add all request handlers to the skill.
 sb.add_request_handler(LaunchRequestHandler())
+sb.add_request_handler(BedroomFloorFanOffIntentHandler())
 sb.add_request_handler(AboutIntentHandler())
 sb.add_request_handler(CoffeeIntentHandler())
 sb.add_request_handler(BreakfastIntentHandler())
