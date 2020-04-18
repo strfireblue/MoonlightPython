@@ -11,6 +11,7 @@ import logging
 import random
 import gettext
 import requests
+import json
 
 from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.handler_input import HandlerInput
@@ -84,8 +85,8 @@ class BedroomFloorFanOffIntentHandler(AbstractRequestHandler):
 
         response = requests.get(url, auth=(MOONLIGHT_USER_NAME, MOONLIGHT_USER_PASSWORD))
 
-        responseJson = response.json()
-
+        responseJson = json.load(response)
+        
         handler_input.response_builder.speak(responseJson("message"))
 
 
