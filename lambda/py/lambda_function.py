@@ -10,6 +10,7 @@
 import logging
 import random
 import gettext
+import requests
 
 from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.handler_input import HandlerInput
@@ -34,6 +35,8 @@ logger.setLevel(logging.INFO)
 # Must be better way to do secret storage in Python, but Lord am I not there yet.
 MOONLIGHT_USER_NAME = "USERNAME"
 MOONLIGHT_USER_PASSWORD = "PASSWORD"
+
+MOONLIGHT_URL_BASE = "https://moonlightcore.strfireblue.info"
 
 # Request Handler classes
 class LaunchRequestHandler(AbstractRequestHandler):
@@ -64,6 +67,11 @@ class ImHomeHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         logger.info("In ImHomeHandler")
+
+        url = MOONLIGHT_URL_BASE + "/api/HomeAuto/actionsequences/BEDROOMFLOORFANOFF"
+
+        response = requests.get(url, auth=(MOONLIGHT_USER_NAME, MOONLIGHT_USER_PASSWORD))
+
 
         handler_input.response_builder.speak("Yo, look who just walked in the door!")
         return handler_input.response_builder.response
