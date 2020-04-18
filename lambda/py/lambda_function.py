@@ -52,6 +52,29 @@ class LaunchRequestHandler(AbstractRequestHandler):
         return handler_input.response_builder.response
 
 
+class ImHomeHandler(AbstractRequestHandler):
+    """Handler for IMHOME EVENT"""
+    def can_handle(self, handler_input):
+        return is_intent_name("ImHomeIntent")(handler_input)
+
+    def handle(self, handler_input):
+        logger.info("In ImHomeHandler")
+
+        handler_input.response_builder.speak("Yo, look who just walked in the door!")
+        return handler_input.response_builder.response
+
+class BedroomFloorFanOffHandler(AbstractRequestHandler):
+    """Handler for BedroomFloorFanOff EVENT"""
+    def can_handle(self, handler_input):
+        return is_intent_name("BedroomFloorFanOffIntent")(handler_input)
+
+    def handle(self, handler_input):
+        logger.info("In BedroomFloorFanOffHandler")
+
+        handler_input.response_builder.speak("OK")
+        return handler_input.response_builder.response
+
+
 class AboutIntentHandler(AbstractRequestHandler):
     """Handler for about intent."""
     def can_handle(self, handler_input):
