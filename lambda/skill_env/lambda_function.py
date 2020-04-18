@@ -74,9 +74,9 @@ class ImHomeHandler(AbstractRequestHandler):
 class BedroomFloorFanOffIntentHandler(AbstractRequestHandler):
     """Handler for BedroomFloorFanOff EVENT"""
     def can_handle(self, handler_input):
-        #logger.info("Checking to see if BedroomFloorFanOffIntentHandler should handle: " + is_intent_name("BedroomFloorFanOffIntent")(handler_input))
-        #return is_intent_name("BedroomFloorFanOffIntent")(handler_input)
-        return true
+        logger.info("Checking to see if BedroomFloorFanOffIntentHandler should handle: " + str(is_intent_name("BedroomFloorFanOffIntent")(handler_input)))
+        return is_intent_name("BedroomFloorFanOffIntent")(handler_input)
+        
 
     def handle(self, handler_input):
         logger.info("In BedroomFloorFanOffHandler")
