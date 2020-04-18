@@ -29,6 +29,11 @@ sb = SkillBuilder()
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+# TODO
+# Replace with actual credentials.
+# Must be better way to do secret storage in Python, but Lord am I not there yet.
+MOONLIGHT_USER_NAME = "USERNAME"
+MOONLIGHT_USER_PASSWORD = "PASSWORD"
 
 # Request Handler classes
 class LaunchRequestHandler(AbstractRequestHandler):
