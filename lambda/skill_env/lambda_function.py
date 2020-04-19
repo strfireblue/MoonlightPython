@@ -52,6 +52,19 @@ class LaunchRequestHandler(AbstractRequestHandler):
         return handler_input.response_builder.response
 
 
+class MoonlightUrlFactory:
+    
+    urlDict = {
+        "BedroomFloorFanOff":"/api/HomeAuto/actionsequences/BEDROOMFLOORFANOFF",
+        "BedroomFloorFanOn":"/api/HomeAuto/actionsequences/BEDROOMFLOORFANON",
+        "IMHOME":"/api/HomeAuto/actionsequences/IMHOME"
+    }
+    
+    @staticmethod
+    def GetUrl(actionSequenceName):
+        return urlDict.get(actionSequenceName, "NONE FOUND")
+
+
 class ImHomeHandler(AbstractRequestHandler):
     """Handler for IMHOME EVENT"""
     def can_handle(self, handler_input):
@@ -72,7 +85,7 @@ class BedroomFloorFanOffIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         logger.info("In BedroomFloorFanOffHandler")
-        url = MOONLIGHT_URL_BASE + "/api/HomeAuto/actionsequences/BEDROOMFLOORFANOFF"
+        url = MOONLIGHT_URL_BASE + MoonlightUrlFactory.GetUrl("BedroomFloorFanOff")
 
         response = requests.get(url, auth=(MOONLIGHT_USER_NAME, MOONLIGHT_USER_PASSWORD))
 
